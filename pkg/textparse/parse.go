@@ -241,6 +241,7 @@ const (
 	MetricTypeGauge     = "gauge"
 	MetricTypeHistogram = "histogram"
 	MetricTypeSummary   = "summary"
+	MetricTypeUntyped   = "untyped"
 )
 
 func parseError(exp string, got token) error {
@@ -284,6 +285,8 @@ func (p *Parser) Next() (Entry, error) {
 				p.mtype = MetricTypeHistogram
 			case "summary":
 				p.mtype = MetricTypeSummary
+			case "untyped":
+				p.mtype = MetricTypeUntyped
 			default:
 				return EntryInvalid, fmt.Errorf("invalid metric type %q", s)
 			}
